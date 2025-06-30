@@ -1,0 +1,575 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #1db285 0%, #1db285 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.card-slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.news-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.5s ease-in-out;
+}
+
+.news-card.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.card-number {
+    background: #affa5f;
+    color: #10926a;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.card-category {
+    background: #f8f9fa;
+    color: #6c757d;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.card-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.card-content p small {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+}
+
+.card-content p strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.card-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.placeholder-image {
+    font-size: 3rem;
+    opacity: 0.3;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.news-card:hover .placeholder-image {
+    opacity: 0.6;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.author {
+    background: #ff91de;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.nav-btn {
+    background: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    color: #667eea;
+}
+
+.nav-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: scale(1.1);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+.indicator:hover {
+    background: rgba(255,255,255,0.8);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    color: rgba(255,255,255,0.7);
+}
+
+.footer p {
+    font-size: 0.9rem;
+}
+
+/* 진행 바 스타일 */
+.progress-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 16.66%;
+}
+
+/* 실제 이미지 스타일 */
+.actual-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.actual-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* 분할 레이아웃 스타일 */
+.card-content.split-content {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px;
+    align-items: center;
+}
+
+.content-text {
+    flex: 1;
+    padding-right: 15px;
+}
+
+.content-text h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.content-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.content-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 15px;
+}
+
+.content-image .actual-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-image .actual-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* 세로 레이아웃 스타일 (카드 1용) */
+.card-content.vertical-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+    text-align: center;
+}
+
+.content-title {
+    margin-bottom: 10px;
+}
+
+.content-title h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.vertical-content .content-text {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.vertical-content .content-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: left;
+}
+
+.content-images-vertical {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image-wrapper {
+    flex: 1;
+    min-width: 270px;
+    max-width: 340px;
+    position: relative;
+    aspect-ratio: 16/9; /* 16:9 비율 설정 */
+}
+
+.content-images-vertical .actual-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-images-vertical .actual-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* 세로 레이아웃 모바일 대응 */
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header p {
+        font-size: 1rem;
+    }
+    
+    .card-container {
+        height: 450px;
+    }
+    
+    .news-card {
+        padding: 25px 20px;
+    }
+    
+    .card-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card-content p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    
+    .placeholder-image {
+        font-size: 4rem;
+    }
+    
+    .card-header {
+        margin-bottom: 20px;
+    }
+    
+    .card-number {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .card-category {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    
+    /* 세로 레이아웃 모바일 대응 */
+    .content-images-vertical {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .image-wrapper {
+        max-width: 100%;
+        min-width: 200px;
+        aspect-ratio: 16/9; /* 모바일에서도 16:9 비율 유지 */
+    }
+    
+    .content-images-vertical .actual-image {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .content-title h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* 애니메이션 효과 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+}
+
+.news-card.slide-in {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.news-card.slide-out {
+    animation: slideOut 0.5s ease-in-out;
+}
+
+/* 갤러리 레이아웃 스타일 (카드 5용) */
+.card-content.gallery-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px;
+    text-align: center;
+}
+
+.gallery-content .content-title {
+    margin-bottom: 5px;
+}
+
+.gallery-content .content-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.gallery-content .content-text {
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.gallery-content .content-text p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #555;
+}
+
+.image-gallery-4x2 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 행 간격도 8px로 통일 */
+    width: 100%;
+    max-height: 400px; /* 갤러리 최대 높이를 400px로 증가 */
+}
+
+.gallery-row {
+    display: flex;
+    gap: 8px; /* 간격을 8px로 명확히 설정 */
+    width: 100%;
+    height: 90px; /* 높이를 90px로 증가 */
+    justify-content: space-between; /* 균등 분배 */
+}
+
+.gallery-item {
+    flex: 1; /* 각 아이템이 동일한 크기로 분할 */
+    max-width: calc(10% - 4px); /* 명확히 50% 너비에서 간격 제외 */
+    height: 100%; /* 행 높이에 맞춤 */
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* 갤러리 모바일 대응 */
+@media (max-width: 768px) {
+    .gallery-content .content-title h2 {
+        font-size: 1.4rem;
+    }
+    
+    .gallery-content .content-text p {
+        font-size: 0.85rem;
+    }
+    
+    .image-gallery-4x2 {
+        gap: 3px;
+        max-height: 220px; /* 모바일에서 더 작은 높이 */
+    }
+    
+    .gallery-row {
+        gap: 3px;
+        height: 50px; /* 모바일에서 각 행 높이 50px */
+    }
+    
+    .gallery-item {
+        border-radius: 4px;
+    }
+}
